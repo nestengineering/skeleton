@@ -1,0 +1,22 @@
+{
+  "name": "skeleton",
+  "version": "0.0.0",
+  "description": "Abstract model of the front end",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestengineering/skeleton.git"
+  },
+  "author": "hand-dot <kyouhei.fukuda0729@gmail.com> (https://github.com/hand-dot)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nestengineering/skeleton/issues"
+  },
+  "homepage": "https://github.com/nestengineering/skeleton#readme"
+}
