@@ -1,25 +1,17 @@
-// tslint:disable-next-line:import-name
 import crawler from './crawler/index';
-// tslint:disable-next-line:import-name
 import parser from './parser/index';
 
-class Skeleton {
+export default class {
   getGraph() {
-    this.crawl();
-    this.parse();
+    return this.parse();
   }
   getAbstractModel() {
-    this.crawl();
-    this.parse();
+    return this.crawl();
   }
   private crawl() {
-    crawler();
+    return crawler();
   }
   private parse() {
-    parser();
+    return parser();
   }
 }
-
-const a = new Skeleton();
-a.getAbstractModel();
-a.getGraph();

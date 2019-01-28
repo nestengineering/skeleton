@@ -1,1 +1,1 @@
-export default () => console.log('Im parser!');
+export default () => 'Im parser!';

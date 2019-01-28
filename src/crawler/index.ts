@@ -1,1 +1,1 @@
-export default () => console.log('Im crawler!');
+export default () => 'Im crawler!';
