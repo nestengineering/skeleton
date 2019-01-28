@@ -1,6 +1,9 @@
 {
   "name": "skeleton",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.15.0"
+  },
   "description": "Abstract model of the front end",
   "main": "index.js",
   "directories": {
