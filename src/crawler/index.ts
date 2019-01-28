@@ -42,5 +42,5 @@ const logicHandler = (framework: Framework): ((arg: string) => boolean) => {
   return logic;
 };
 
-export default (startDir: string, framework: Framework) =>
+export default (startDir: string, framework: Framework): string[] =>
   extractComponentFiles(getFileList(startDir), logicHandler(framework));

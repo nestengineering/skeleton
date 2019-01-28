@@ -12,7 +12,7 @@ export default class {
     // return this.crawl(startDir).map(file => this.parse(file))
     return this.crawl(startDir);
   }
-  private crawl(startDir) {
+  private crawl(startDir: string): string[] {
     return crawler(startDir, this.input);
   }
   private parse() {
