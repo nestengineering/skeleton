@@ -5,12 +5,17 @@
     "node": "10.15.0"
   },
   "description": "Abstract model of the front end",
-  "main": "index.js",
+  "main": "dist/skeleton.cjs.js",
+  "module": "dist/skeleton.esm.js",
+  "browser": "dist/skeleton.umd.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register test/**/*.ts",
+    "pretest": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,5 +26,19 @@
   "bugs": {
     "url": "https://github.com/nestengineering/skeleton/issues"
   },
-  "homepage": "https://github.com/nestengineering/skeleton#readme"
+  "homepage": "https://github.com/nestengineering/skeleton#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "rollup": "^1.0.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-typescript": "^1.0.0",
+    "ts-node": "^7.0.1",
+    "tslib": "^1.9.3",
+    "typescript": "^3.2.4"
+  },
+  "files": [
+    "dist"
+  ]
 }
