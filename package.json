@@ -5,17 +5,10 @@
     "node": "10.15.0"
   },
   "description": "Abstract model of the front end",
-  "main": "dist/skeleton.cjs.js",
-  "module": "dist/skeleton.esm.js",
-  "browser": "dist/skeleton.umd.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register test/**/*.ts",
-    "pretest": "npm run build"
+    "build": "tsc --module amd --outDir dist src/index.ts",
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register test/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -30,15 +23,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "rollup": "^1.0.0",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-typescript": "^1.0.0",
     "ts-node": "^7.0.1",
-    "tslib": "^1.9.3",
     "typescript": "^3.2.4"
   },
-  "files": [
-    "dist"
-  ]
 }
