@@ -13,7 +13,7 @@
 ### ・Generate template and component diagram
 ![skeleton 1](https://user-images.githubusercontent.com/24843808/51929062-acf5be00-243a-11e9-907b-b9d4c5615d9b.png)
 
-### ・Convert framework
+### ・Convert frameworks
 ![skeleton 3](https://user-images.githubusercontent.com/24843808/51929545-d5ca8300-243b-11e9-8ed0-e21d1809c1a8.png)
 
 ## Support
