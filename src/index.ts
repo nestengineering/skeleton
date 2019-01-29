@@ -3,9 +3,9 @@ import parser from "./parser/index";
 import { Framework } from "./constants";
 
 export default class {
-  input: Framework;
+  inputFW: Framework;
   constructor(input: Framework) {
-    this.input = input;
+    this.inputFW = input;
   }
   getAbstractModel(startDir) {
     // MEMO イメージ的にはこんな感じ？
@@ -13,7 +13,7 @@ export default class {
     return this.crawl(startDir);
   }
   private crawl(startDir: string): string[] {
-    return crawler(startDir, this.input);
+    return crawler(startDir, this.inputFW);
   }
   private parse() {
     return parser();
