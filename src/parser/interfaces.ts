@@ -1,4 +1,4 @@
-interface Vue {
+export interface Vue {
   data?: () => { readonly [key: string]: any };
   props?: { readonly [key: string]: any };
   methods?: { readonly [key: string]: () => any };
