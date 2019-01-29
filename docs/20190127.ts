@@ -62,7 +62,7 @@ interface UsersPage extends Partial<Component> {
     handleAge: () => {};
     handleJob: () => {};
   };
-  children: [Header, Sidebar, UserList, Footer];
+  // children: [Header, Sidebar, UserList, Footer];
 }
 
 
