@@ -1,5 +1,5 @@
-import { readFileSync } from 'fs';
-import { Vue } from './interfaces';
+import { readFileSync } from "fs";
+import { Vue } from "./interfaces";
 
 /**
  * Parse from vue file
@@ -7,17 +7,15 @@ import { Vue } from './interfaces';
  * @param {string} path File path
  * @return {any} Parsed values
  */
-const parseVue = (path: string) => {
+const parseVue = (path: string): Vue => {
   const regex = /(<script>(.|\n|\r)*<\/script>)/;
   const file = readFileSync(path).toString();
   const [scriptTemplate] = file.split(regex).filter(str => regex.test(str));
 
   const vueObjTemplate = scriptTemplate
-    .substring(8, scriptTemplate.length - 9) // Remove the <script></script> tag
-    .split(/export default/g)
-    .filter(str => !/import.+("|').*("|').*/.test(str)); // Remove import statements
-
-  return vueObjTemplate;
+    .substring('<script>'.length, scriptTemplate.length - '</script>'.length)
+    .replace(/export default/g, "return");
+  return new Function(vueObjTemplate)();
 };
 
 const parseReact = () => {};
@@ -27,5 +25,5 @@ const parseAngular = () => {};
 export default {
   parseVue,
   parseReact,
-  parseAngular,
+  parseAngular
 };
