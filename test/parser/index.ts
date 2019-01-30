@@ -40,7 +40,7 @@ components: {
 <style>
 </style>`;
 
-describe.only('vue parser', () => {
+describe('vue parser', () => {
   it('should return parsed values', () => {
     const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
     fs.mkdirSync(tmp, { recursive: true });
