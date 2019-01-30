@@ -7,8 +7,8 @@
   "description": "Abstract model of the front end",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc --module amd --outDir dist src/index.ts",
-    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register test/**/*.ts"
+    "build": "tsc --module commonjs --outDir dist src/index.ts",
+    "test": "mocha -r ts-node/register test/**/*.ts"
   },
   "repository": {
     "type": "git",

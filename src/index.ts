@@ -1,6 +1,6 @@
-import crawler from "./crawler/index";
-import parser from "./parser/index";
-import { Framework } from "./constants";
+import crawler from './crawler/index';
+import parser from './parser/index';
+import { Framework } from './constants';
 
 export default class {
   inputFW: Framework;
@@ -16,6 +16,6 @@ export default class {
     return crawler(startDir, this.inputFW);
   }
   private parse() {
-    return parser();
+    // return parser();
   }
 }
