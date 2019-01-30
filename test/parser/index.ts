@@ -40,13 +40,13 @@ components: {
 <style>
 </style>`;
 
-describe('vue parser', () => {
+describe.only('vue parser', () => {
   it('should return parsed values', () => {
     const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/alice.vue`, VUE);
     const parseResult = parser.parseVue(`${tmp}/alice.vue`);
-    console.log(parseResult);
-    assert.equal(6, 6);
+
+    assert.exists(parseResult, 'parseResult is neither `null` nor `undefined`');
   });
 });

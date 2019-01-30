@@ -2,10 +2,10 @@ import { readFileSync } from 'fs';
 import { Vue, Component } from './../types';
 
 /**
- * Parse from vue file
+ * Parse values from vue file
  *
  * @param {string} path File path
- * @return {any} Parsed values
+ * @return {Component} Parsed values
  */
 const parseVue = (path: string): Component => {
   const regex = /(<script>(.|\n|\r)*<\/script>)/;
