@@ -1,9 +1,9 @@
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
-import { describe, it } from "mocha";
-import { assert } from "chai";
-import parser from "../../src/parser";
+import * as path from 'path';
+import * as fs from 'fs';
+import * as os from 'os';
+import { describe, it } from 'mocha';
+import { assert } from 'chai';
+import parser from '../../src/parser';
 
 const VUE = `<template>
 <div>
@@ -13,7 +13,9 @@ const VUE = `<template>
 </template>
 
 <script>
-const Login = 'src/components/Login.vue';
+import Login from '/src/login';
+import * as Logout from 'src/login';
+import { Person, Force } from 'src/logs';
 
 export default {
 data(){
@@ -38,15 +40,13 @@ components: {
 <style>
 </style>`;
 
-
-
-describe.only("test", () => {
-  it("case1", () => {
-    const tmp = path.resolve(os.tmpdir(), "skeleton_test/src/components");
+describe.only('vue parser', () => {
+  it('should return parsed values', () => {
+    const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/alice.vue`, VUE);
-    const a = parser.parseVue(`${tmp}/alice.vue`);
-    console.log(JSON.stringify(a));
+    const parseResult = parser.parseVue(`${tmp}/alice.vue`);
+    console.log(parseResult);
     assert.equal(6, 6);
   });
 });
