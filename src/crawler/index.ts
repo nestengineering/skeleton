@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-import VueLogic from "./logics/vue";
+import VueLogic from "../logics/vue";
+import ReactLogic from "../logics/react";
+import AngularLogic from "../logics/angular";
 import { Framework } from "../constants";
 
 const getFileList = (
@@ -29,13 +31,9 @@ const extractComponentFiles = (
 const logicHandler = (framework: Framework): ((arg: string) => boolean) => {
   let logic: (arg: string) => boolean;
   if (framework === Framework.REACT) {
-    logic = () => {
-      throw Error("Not Implemented!");
-    };
+    logic = ReactLogic.isComponent;
   } else if (framework === Framework.ANGULAR) {
-    logic = () => {
-      throw Error("Not Implemented!");
-    };
+    logic = AngularLogic.isComponent;
   } else if (framework === Framework.VUE) {
     logic = VueLogic.isComponent;
   }
