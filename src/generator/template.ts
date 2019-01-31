@@ -3,15 +3,17 @@ import * as fs from 'fs';
 import { Component, ComponentInfo } from './../types';
 import { Framework } from '../constants';
 
-const engine = (
-  framework: Framework,
-  component: Component
-): { toString: () => string } =>
-  ({
-    [Framework.VUE]: { toString: () => 'Hello world' },
-    [Framework.REACT]: { toString: () => 'Hello world' },
-    [Framework.ANGULAR]: { toString: () => 'Hello world' }
-  }[framework]);
+const engines = {
+  [Framework.VUE]: (component: Component) => ({
+    toString: () => 'Hello world'
+  }),
+  [Framework.REACT]: (component: Component) => ({
+    toString: () => 'Hello world'
+  }),
+  [Framework.ANGULAR]: (component: Component) => ({
+    toString: () => 'Hello world'
+  })
+};
 
 const writeFile = (info: ComponentInfo, content: string) => {
   const output = path.resolve(
@@ -24,10 +26,17 @@ const writeFile = (info: ComponentInfo, content: string) => {
   fs.writeFileSync(`${output}/${info.name}.${info.extension}`, content);
 };
 
+/**
+ * Generate a framework template file starting from a Component
+ *
+ * @param framework Target framework
+ * @param info Output file info
+ * @param component Target component
+ */
 const createTemplate = (
   framework: Framework,
   info: ComponentInfo,
   component: Component
-) => writeFile(info, engine(framework, component).toString());
+) => writeFile(info, engines[framework](component).toString());
 
 export default { createTemplate };

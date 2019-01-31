@@ -4,6 +4,7 @@ import * as os from 'os';
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import parser from '../../src/parser';
+import { Framework } from '../../src/constants';
 
 const VUE = `<template>
 <div>
@@ -45,7 +46,7 @@ describe('vue parser', () => {
     const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/alice.vue`, VUE);
-    const parseResult = parser.parseVue(`${tmp}/alice.vue`);
+    const parseResult = parser.convert(Framework.VUE, `${tmp}/alice.vue`);
 
     assert.exists(parseResult, 'parseResult is neither `null` nor `undefined`');
   });
