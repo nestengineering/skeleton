@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { Vue, Component } from './../types';
 import { Framework } from '../constants';
 
-const parsers = {
+const parsers: { [framework in Framework]: (path: string) => Component } = {
   [Framework.VUE]: (path: string) => {
     const regex = /(<script>(.|\n|\r)*<\/script>)/;
     const file = readFileSync(path).toString();
@@ -26,6 +26,24 @@ const parsers = {
         : []
     };
     return component;
+  },
+  [Framework.REACT]: (path: string) => {
+    const conponent: Component = {
+      state: {},
+      props: {},
+      methods: {},
+      templates: []
+    };
+    return conponent;
+  },
+  [Framework.ANGULAR]: (path: string) => {
+    const conponent: Component = {
+      state: {},
+      props: {},
+      methods: {},
+      templates: []
+    };
+    return conponent;
   }
 };
 

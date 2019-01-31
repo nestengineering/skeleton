@@ -3,16 +3,12 @@ import * as fs from 'fs';
 import { Component, ComponentInfo } from './../types';
 import { Framework } from '../constants';
 
-const engines = {
-  [Framework.VUE]: (component: Component) => ({
-    toString: () => 'Hello world'
-  }),
-  [Framework.REACT]: (component: Component) => ({
-    toString: () => 'Hello world'
-  }),
-  [Framework.ANGULAR]: (component: Component) => ({
-    toString: () => 'Hello world'
-  })
+const engines: {
+  [framework in Framework]: { convert: (componet: Component) => string }
+} = {
+  [Framework.VUE]: { convert: (component: Component) => 'return' },
+  [Framework.REACT]: { convert: (component: Component) => 'return' },
+  [Framework.ANGULAR]: { convert: (component: Component) => 'return' }
 };
 
 const writeFile = (info: ComponentInfo, content: string) => {
@@ -37,6 +33,6 @@ const createTemplate = (
   framework: Framework,
   info: ComponentInfo,
   component: Component
-) => writeFile(info, engines[framework](component).toString());
+) => writeFile(info, engines[framework].convert(component));
 
 export default { createTemplate };
