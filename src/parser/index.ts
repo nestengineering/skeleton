@@ -23,7 +23,7 @@ const parseVue = (path: string): Component => {
     state: vueObj.data ? vueObj.data() : {},
     props: vueObj.props ? vueObj.props : {},
     methods: vueObj.methods ? vueObj.methods : {},
-    template: vueObj.components
+    templates: vueObj.components
       ? Object.entries(vueObj.components).map(([key, value]) => ({
           [key]: value,
         }))
