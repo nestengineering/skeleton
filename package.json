@@ -27,6 +27,7 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
+    "@types/ejs": "^2.6.1",
     "@types/node": "^10.12.18",
     "ejs": "^2.6.1"
   }

@@ -44,7 +44,7 @@ components: {
 <style lang="scss" scoped>
 </style>`;
 
-const VUE_NO_PROPS_STATE = `<template>
+const VUE_NO_PROPS_AND_STATE = `<template>
 <div>
   <div></div>
   <slot name="header"/>
@@ -86,13 +86,11 @@ describe('vue parser', () => {
     assert.exists(parseResult, 'parseResult is neither `null` nor `undefined`');
   });
 
-  it('should return parsed values: no props, no state', () => {
+  it('should return parsed values: template with no props nor state', () => {
     const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
     fs.mkdirSync(tmp, { recursive: true });
-    fs.writeFileSync(`${tmp}/wonderland.vue`, VUE_NO_PROPS_STATE);
+    fs.writeFileSync(`${tmp}/wonderland.vue`, VUE_NO_PROPS_AND_STATE);
     const parseResult = parser.convert(Framework.VUE, `${tmp}/wonderland.vue`);
-
-    console.log(parseResult);
 
     assert.exists(parseResult, 'parseResult is neither `null` nor `undefined`');
   });
