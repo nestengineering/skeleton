@@ -19,7 +19,7 @@ const parsers: { [framework in Framework]: (path: string) => Component } = {
       state: vueObj.data ? vueObj.data() : {},
       props: vueObj.props ? vueObj.props : {},
       methods: vueObj.methods ? vueObj.methods : {},
-      templates: vueObj.components
+      children: vueObj.components
         ? Object.entries(vueObj.components).map(([key, value]) => ({
             [key]: value
           }))
@@ -32,7 +32,7 @@ const parsers: { [framework in Framework]: (path: string) => Component } = {
       state: {},
       props: {},
       methods: {},
-      templates: []
+      children: []
     };
     return conponent;
   },
@@ -41,7 +41,7 @@ const parsers: { [framework in Framework]: (path: string) => Component } = {
       state: {},
       props: {},
       methods: {},
-      templates: []
+      children: []
     };
     return conponent;
   }
