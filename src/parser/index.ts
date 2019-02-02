@@ -19,12 +19,16 @@ const parsers: { [framework in Framework]: (path: string) => Component } = {
       state: vueObj.data ? vueObj.data() : {},
       props: vueObj.props ? vueObj.props : {},
       methods: vueObj.methods ? vueObj.methods : {},
-      children: vueObj.components
-        ? Object.entries(vueObj.components).map(([key, value]) => ({
-            [key]: value
-          }))
-        : []
+      children: []
     };
+
+    // FIXME
+    const tmp = vueObj.components
+      ? Object.entries(vueObj.components).map(([key, value]) => ({
+          [key]: value
+        }))
+      : [];
+
     return component;
   },
   [Framework.REACT]: (path: string) => {
