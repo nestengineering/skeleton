@@ -1,11 +1,13 @@
 import { readFileSync } from 'fs';
+import * as path from 'path';
 import { Vue, Component } from './../types';
 import { Framework } from '../constants';
 
-const parsers: { [framework in Framework]: (path: string) => Component } = {
-  [Framework.VUE]: (path: string) => {
+const parsers: { [framework in Framework]: (filePath: string) => Component } = {
+  [Framework.VUE]: (filePath: string) => {
+    console.log(filePath);
     const regex = /(<script>(.|\n|\r)*<\/script>)/;
-    const file = readFileSync(path).toString();
+    const file = readFileSync(filePath).toString();
     const [scriptTemplate] = file.split(regex).filter(str => regex.test(str));
 
     const vueObjTemplate = scriptTemplate
@@ -19,15 +21,15 @@ const parsers: { [framework in Framework]: (path: string) => Component } = {
       state: vueObj.data ? vueObj.data() : {},
       props: vueObj.props ? vueObj.props : {},
       methods: vueObj.methods ? vueObj.methods : {},
-      children: []
+      children: vueObj.components
+        ? Object.entries(vueObj.components).map(([key, relPath]) => {
+            console.log(relPath);
+            return parsers[Framework.VUE](
+              path.resolve(filePath.match(/.*(?=\/.*\.vue)/g).join(), relPath)
+            );
+          })
+        : []
     };
-
-    // FIXME
-    const tmp = vueObj.components
-      ? Object.entries(vueObj.components).map(([key, value]) => ({
-          [key]: value
-        }))
-      : [];
 
     return component;
   },

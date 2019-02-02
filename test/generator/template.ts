@@ -15,7 +15,7 @@ describe('template generator', () => {
       state: {},
       props: {},
       methods: {},
-      templates: []
+      children: []
     };
     generator.createTemplate(Framework.VUE, info, component);
     assert(1, 1);
