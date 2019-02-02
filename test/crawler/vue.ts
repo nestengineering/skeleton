@@ -8,7 +8,7 @@ import { Framework } from "../../src/constants";
 
 describe("vue crawler", () => {
   it("should return vue files", () => {
-    const tmp = path.resolve(os.tmpdir(), "skeleton_test/src/components");
+    const tmp = path.resolve(os.tmpdir(), "skeleton_test/crawler/src/components");
 
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/alice.vue`, "Im alice.vue"); // This is Vue🖖(1)
@@ -44,7 +44,7 @@ describe("vue crawler", () => {
     fs.writeFileSync(`${tmp}/${organisms}/cpu`, "Im cpu");
     fs.writeFileSync(`${tmp}/${organisms}/car.vue`, "Im car.vue"); // This is Vue🖖(6)
     fs.writeFileSync(`${tmp}/${organisms}/card.md`, "Im card.md");
-    console.log(JSON.stringify(crawler(tmp, Framework.VUE)))
+
     assert.equal(crawler(tmp, Framework.VUE).length, 6);
 
   });

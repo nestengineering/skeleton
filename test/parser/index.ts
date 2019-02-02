@@ -78,7 +78,7 @@ components: {
 
 describe('vue parser', () => {
   it('should return parsed values', () => {
-    const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
+    const tmp = path.resolve(os.tmpdir(), 'skeleton_test/parser/src/components');
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/alice.vue`, VUE_ALL);
     const parseResult = parser.convert(Framework.VUE, `${tmp}/alice.vue`);
@@ -87,7 +87,7 @@ describe('vue parser', () => {
   });
 
   it('should return parsed values: template with no props nor state', () => {
-    const tmp = path.resolve(os.tmpdir(), 'skeleton_test/src/components');
+    const tmp = path.resolve(os.tmpdir(), 'skeleton_test/parser/src/components');
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/wonderland.vue`, VUE_NO_PROPS_AND_STATE);
     const parseResult = parser.convert(Framework.VUE, `${tmp}/wonderland.vue`);
