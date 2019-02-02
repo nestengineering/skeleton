@@ -1,6 +1,6 @@
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
+import * as path from 'path';
+import * as fs from 'fs';
+import * as os from 'os';
 import { describe, it } from "mocha";
 import { assert } from "chai";
 import crawler from "../../src/crawler";
@@ -8,7 +8,7 @@ import { Framework } from "../../src/constants";
 
 describe("vue crawler", () => {
   it("should return vue files", () => {
-    const tmp = path.resolve(os.tmpdir(), "skeleton_test/src/components");
+    const tmp = path.resolve(os.tmpdir(), "skeleton_test/crawler/src/components");
 
     fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(`${tmp}/alice.vue`, "Im alice.vue"); // This is Vue🖖(1)
