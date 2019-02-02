@@ -22,12 +22,11 @@ const parsers: { [framework in Framework]: (filePath: string) => Component } = {
       props: vueObj.props ? vueObj.props : {},
       methods: vueObj.methods ? vueObj.methods : {},
       children: vueObj.components
-        ? Object.entries(vueObj.components).map(([key, relPath]) => {
-            console.log(relPath);
-            return parsers[Framework.VUE](
+        ? Object.entries(vueObj.components).map(([key, relPath]) =>
+            parsers[Framework.VUE](
               path.resolve(filePath.match(/.*(?=\/.*\.vue)/g).join(), relPath)
-            );
-          })
+            )
+          )
         : []
     };
 
