@@ -1,6 +1,6 @@
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
+import * as path from 'path';
+import * as fs from 'fs';
+import * as os from 'os';
 import { describe, it } from "mocha";
 import { assert } from "chai";
 import crawler from "../../src/crawler";
@@ -44,7 +44,7 @@ describe("vue crawler", () => {
     fs.writeFileSync(`${tmp}/${organisms}/cpu`, "Im cpu");
     fs.writeFileSync(`${tmp}/${organisms}/car.vue`, "Im car.vue"); // This is Vue🖖(6)
     fs.writeFileSync(`${tmp}/${organisms}/card.md`, "Im card.md");
-
+    console.log(JSON.stringify(crawler(tmp, Framework.VUE)))
     assert.equal(crawler(tmp, Framework.VUE).length, 6);
 
   });
