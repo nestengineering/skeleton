@@ -26,8 +26,10 @@
     "@types/node": "^10.12.20",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "opener": "^1.5.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.4"
+  },
+  "dependencies": {
+    "opener": "^1.5.1"
   }
 }
