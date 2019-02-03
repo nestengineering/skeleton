@@ -87,12 +87,14 @@ const VUE_MODAL = `<template>
 export default {
 data() {
   return {
+    isEditing: "",
   };
 },
+props: {
+  value: String,
+},
 methods: {
-  signIn() {
-  },
-  signOut() {}
+  changeValue() {}
 },
 components: {
 }
@@ -120,8 +122,16 @@ describe('vue parser', () => {
       Framework.VUE,
       `${componentsTmp}/alice.vue`
     );
-
-    assert.exists(parseResult, 'parseResult is neither `null` nor `undefined`');
+    assert.deepEqual(parseResult.state, { username: '', password: '' });
+    assert.deepEqual(parseResult.props, { token: String, id: Number });
+    assert.isFunction(parseResult.methods.signIn);
+    assert.isFunction(parseResult.methods.signOut);
+    assert.notExists(parseResult.methods.hoge);
+    assert(parseResult.children.length, 1);
+    assert.deepEqual(parseResult.children[0].state, { isEditing: '' });
+    assert.deepEqual(parseResult.children[0].props, { value: String });
+    assert.exists(parseResult.children[0].methods.changeValue);
+    assert.notExists(parseResult.children[0].methods.hoge);
   });
 
   it('should return parsed values: template with no props nor state', () => {
@@ -142,6 +152,15 @@ describe('vue parser', () => {
       `${componentsTmp}/wonderland.vue`
     );
 
-    assert.exists(parseResult, 'parseResult is neither `null` nor `undefined`');
+    assert.deepEqual(parseResult.state, {});
+    assert.deepEqual(parseResult.props, {});
+    assert.isFunction(parseResult.methods.signIn);
+    assert.isFunction(parseResult.methods.signOut);
+    assert.notExists(parseResult.methods.hoge);
+    assert(parseResult.children.length, 1);
+    assert.deepEqual(parseResult.children[0].state, { isEditing: '' });
+    assert.deepEqual(parseResult.children[0].props, { value: String });
+    assert.exists(parseResult.children[0].methods.changeValue);
+    assert.notExists(parseResult.children[0].methods.hoge);
   });
 });
