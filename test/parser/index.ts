@@ -130,7 +130,7 @@ describe('vue parser', () => {
     assert(parseResult.children.length, 1);
     assert.deepEqual(parseResult.children[0].state, { isEditing: '' });
     assert.deepEqual(parseResult.children[0].props, { value: String });
-    assert.exists(parseResult.children[0].methods.changeValue);
+    assert.isFunction(parseResult.children[0].methods.changeValue);
     assert.notExists(parseResult.children[0].methods.hoge);
   });
 
@@ -160,7 +160,7 @@ describe('vue parser', () => {
     assert(parseResult.children.length, 1);
     assert.deepEqual(parseResult.children[0].state, { isEditing: '' });
     assert.deepEqual(parseResult.children[0].props, { value: String });
-    assert.exists(parseResult.children[0].methods.changeValue);
+    assert.isFunction(parseResult.children[0].methods.changeValue);
     assert.notExists(parseResult.children[0].methods.hoge);
   });
 });
