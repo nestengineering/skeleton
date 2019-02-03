@@ -18,6 +18,6 @@ describe('template generator', () => {
       children: []
     };
     generator.createTemplate(Framework.VUE, info, component);
-    assert(1, 1);
+    assert.equal(1, 1);
   });
 });
