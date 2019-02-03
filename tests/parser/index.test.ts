@@ -4,33 +4,27 @@ import * as os from 'os';
 import { readFileSync } from 'fs';
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import parser from '../../src/parser';
+import { parse } from '../../src/parser';
 import { Framework } from '../../src/constants';
+
+const SRC = 'skeleton_test/parser/src';
+const ASSETS_VUE = '../test-assets/vue/';
 
 describe('vue parser', () => {
   it('should return parsed values', () => {
-    const componentsTmp = path.resolve(
-      os.tmpdir(),
-      'skeleton_test/parser/src/components'
-    );
-    const partsTmp = path.resolve(
-      os.tmpdir(),
-      'skeleton_test/parser/src/parts'
-    );
+    const componentsTmp = path.resolve(os.tmpdir(), `${SRC}/components`);
+    const partsTmp = path.resolve(os.tmpdir(), `${SRC}/parts`);
     fs.mkdirSync(componentsTmp, { recursive: true });
     fs.mkdirSync(partsTmp, { recursive: true });
     fs.writeFileSync(
       `${componentsTmp}/alice.vue`,
-      readFileSync(require.resolve('../test-assets/vue/FullData.vue')).toString()
+      readFileSync(require.resolve(`${ASSETS_VUE}FullData.vue`)).toString()
     );
     fs.writeFileSync(
       `${partsTmp}/modal.vue`,
-      readFileSync(require.resolve('../test-assets/vue/Model.vue')).toString()
+      readFileSync(require.resolve(`${ASSETS_VUE}Model.vue`)).toString()
     );
-    const parseResult = parser.convert(
-      Framework.VUE,
-      `${componentsTmp}/alice.vue`
-    );
+    const parseResult = parse(Framework.VUE, `${componentsTmp}/alice.vue`);
     assert.deepEqual(parseResult.state, { username: '', password: '' });
     assert.deepEqual(parseResult.props, { token: String, id: Number });
     assert.isFunction(parseResult.methods.signIn);
@@ -44,30 +38,21 @@ describe('vue parser', () => {
   });
 
   it('should return parsed values: template with no props nor state', () => {
-    const componentsTmp = path.resolve(
-      os.tmpdir(),
-      'skeleton_test/parser/src/components'
-    );
-    const partsTmp = path.resolve(
-      os.tmpdir(),
-      'skeleton_test/parser/src/parts'
-    );
+    const componentsTmp = path.resolve(os.tmpdir(), `${SRC}/components`);
+    const partsTmp = path.resolve(os.tmpdir(), `${SRC}/parts`);
     fs.mkdirSync(componentsTmp, { recursive: true });
     fs.mkdirSync(partsTmp, { recursive: true });
     fs.writeFileSync(
       `${componentsTmp}/wonderland.vue`,
       readFileSync(
-        require.resolve('../test-assets/vue/NoPropsAndState.vue')
+        require.resolve(`${ASSETS_VUE}NoPropsAndState.vue`)
       ).toString()
     );
     fs.writeFileSync(
       `${partsTmp}/modal.vue`,
-      readFileSync(require.resolve('../test-assets/vue/Model.vue')).toString()
+      readFileSync(require.resolve(`${ASSETS_VUE}Model.vue`)).toString()
     );
-    const parseResult = parser.convert(
-      Framework.VUE,
-      `${componentsTmp}/wonderland.vue`
-    );
+    const parseResult = parse(Framework.VUE, `${componentsTmp}/wonderland.vue`);
 
     assert.deepEqual(parseResult.state, {});
     assert.deepEqual(parseResult.props, {});

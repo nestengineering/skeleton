@@ -1,5 +1,12 @@
+import { Component } from './../types';
 export default {
-  isComponent: (filePath: string): boolean => {
-    throw Error("Not Implemented!");
+  parse: (path: string) => {
+    const conponent: Component = {
+      state: {},
+      props: {},
+      methods: {},
+      children: []
+    };
+    return conponent;
   }
 };
