@@ -5,24 +5,23 @@ import { Framework } from '../constants';
 
 const parsers: { [framework in Framework]: (filePath: string) => Component } = {
   [Framework.VUE]: (filePath: string) => {
-    console.log(filePath);
     const regex = /(<script>(.|\n|\r)*<\/script>)/;
     const file = readFileSync(filePath).toString();
     const [scriptTemplate] = file.split(regex).filter(str => regex.test(str));
 
-    const vueObjTemplate = scriptTemplate
+    const template = scriptTemplate
       .substring('<script>'.length, scriptTemplate.length - '</script>'.length)
       .replace(/export default/g, 'return')
       .replace(/import\s?\*?\s?(as)?{?(?=\s.*('|").*('|");)/g, 'let')
       .replace(/\s?}?\s?from(?=\s?('|").*('|");)/g, ' =');
 
-    const vueObj: Vue = new Function(vueObjTemplate)();
+    const vue: Vue = new Function(template)();
     const component: Component = {
-      state: vueObj.data ? vueObj.data() : {},
-      props: vueObj.props ? vueObj.props : {},
-      methods: vueObj.methods ? vueObj.methods : {},
-      children: vueObj.components
-        ? Object.entries(vueObj.components).map(([key, relPath]) =>
+      state: vue.data ? vue.data() : {},
+      props: vue.props ? vue.props : {},
+      methods: vue.methods ? vue.methods : {},
+      children: vue.components
+        ? Object.entries(vue.components).map(([key, relPath]) =>
             parsers[Framework.VUE](
               path.resolve(filePath.match(/.*(?=\/.*\.vue)/g).join(), relPath)
             )
@@ -53,7 +52,7 @@ const parsers: { [framework in Framework]: (filePath: string) => Component } = {
 };
 
 /**
- * Parse values from vue a specific framework
+ * Parses values from React, Vue, or Angualar framework file
  *
  * @param framework Target framework
  * @param path File path
