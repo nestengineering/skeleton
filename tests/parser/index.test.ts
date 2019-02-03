@@ -8,7 +8,7 @@ import { parse } from '../../src/parser';
 import { Framework } from '../../src/constants';
 
 const SRC = 'skeleton_test/parser/src';
-const ASSETS_VUE = '../test-assets/vue/';
+const ASSETS_VUE = '../test-assets/vue';
 
 describe('vue parser', () => {
   it('should return parsed values', () => {
@@ -17,14 +17,14 @@ describe('vue parser', () => {
     fs.mkdirSync(componentsTmp, { recursive: true });
     fs.mkdirSync(partsTmp, { recursive: true });
     fs.writeFileSync(
-      `${componentsTmp}/alice.vue`,
-      readFileSync(require.resolve(`${ASSETS_VUE}FullData.vue`)).toString()
+      `${componentsTmp}/FullData.vue`,
+      readFileSync(require.resolve(`${ASSETS_VUE}/FullData.vue`)).toString()
     );
     fs.writeFileSync(
-      `${partsTmp}/modal.vue`,
-      readFileSync(require.resolve(`${ASSETS_VUE}Model.vue`)).toString()
+      `${partsTmp}/Model.vue`,
+      readFileSync(require.resolve(`${ASSETS_VUE}/Model.vue`)).toString()
     );
-    const parseResult = parse(Framework.VUE, `${componentsTmp}/alice.vue`);
+    const parseResult = parse(Framework.VUE, `${componentsTmp}/FullData.vue`);
     assert.deepEqual(parseResult.state, { username: '', password: '' });
     assert.deepEqual(parseResult.props, { token: String, id: Number });
     assert.isFunction(parseResult.methods.signIn);
@@ -43,16 +43,16 @@ describe('vue parser', () => {
     fs.mkdirSync(componentsTmp, { recursive: true });
     fs.mkdirSync(partsTmp, { recursive: true });
     fs.writeFileSync(
-      `${componentsTmp}/wonderland.vue`,
+      `${componentsTmp}/NoPropsAndState.vue`,
       readFileSync(
-        require.resolve(`${ASSETS_VUE}NoPropsAndState.vue`)
+        require.resolve(`${ASSETS_VUE}/NoPropsAndState.vue`)
       ).toString()
     );
     fs.writeFileSync(
-      `${partsTmp}/modal.vue`,
-      readFileSync(require.resolve(`${ASSETS_VUE}Model.vue`)).toString()
+      `${partsTmp}/Model.vue`,
+      readFileSync(require.resolve(`${ASSETS_VUE}/Model.vue`)).toString()
     );
-    const parseResult = parse(Framework.VUE, `${componentsTmp}/wonderland.vue`);
+    const parseResult = parse(Framework.VUE, `${componentsTmp}/NoPropsAndState.vue`);
 
     assert.deepEqual(parseResult.state, {});
     assert.deepEqual(parseResult.props, {});
