@@ -1,7 +1,7 @@
 import { Component, ComponentInfo } from './../../src/types';
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import { generate } from '../../src/generator/template';
+import generate from '../../src/generator/template';
 import { Framework } from '../../src/constants';
 
 describe('template generator', () => {
@@ -12,9 +12,17 @@ describe('template generator', () => {
       name: 'my-first-component'
     };
     const component: Component = {
-      state: {},
-      props: {},
-      methods: {},
+      state: {
+        password: ''
+      },
+      props: {
+        user: String
+      },
+      methods: {
+        signIn() {
+          console.log('Signed-in');
+        }
+      },
       children: []
     };
     generate(Framework.VUE, info, component);

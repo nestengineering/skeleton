@@ -32,7 +32,7 @@ const writeFile = (info: ComponentInfo, content: string) => {
  * @param info Output file info
  * @param component Target component
  */
-export const generate = (
+export default (
   framework: Framework,
   info: ComponentInfo,
   component: Component

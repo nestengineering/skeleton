@@ -1,6 +1,6 @@
 import diagram from './diagram';
-import template from './template';
+import generate from './template';
 export default {
   generateDiagram: diagram,
-  generateTemplate: template
+  generateTemplate: generate
 };

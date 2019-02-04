@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Modal from "../parts/modal.vue";
+import Modal from "../parts/Model.vue";
 import * as Parser from "src/util/parser";
 import { User, UserDetails } from "src/interfaces";
 
