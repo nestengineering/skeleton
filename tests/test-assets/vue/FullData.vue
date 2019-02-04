@@ -1,12 +1,12 @@
 <template>
-<div>
-  <div></div>
-  <slot name="header"/>
-</div>
+  <div>
+    <div></div>
+    <slot name="header"/>
+  </div>
 </template>
 
 <script>
-import Modal from "../parts/modal.vue";
+import Model from "../parts/Model.vue";
 import * as Parser from "src/util/parser";
 import { User, UserDetails } from "src/interfaces";
 
@@ -28,7 +28,7 @@ methods: {
   signOut() {}
 },
 components: {
-  Modal
+  Model
 }
 };
 </script>

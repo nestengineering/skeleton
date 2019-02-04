@@ -2,6 +2,10 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "target": "ES2017"
+    "baseUrl": "./",
+    "module": "commonjs",
+    "outDir": "./dist/src/index.ts",
+    "target": "ES6",
+    "lib": ["es2017", "dom"]
   }
 }

@@ -29,6 +29,48 @@ export default {
     return component;
   },
   generate: function generate(component: Component) {
-    return '';
+    const stringifyObject = (obj: {}) => {
+      const str = Object.entries(obj)
+        .map(([key, entry], index) => {
+          switch (typeof entry) {
+            case 'string':
+              return `${key}: '${entry}'`;
+            case 'function':
+              return `${key}: function ${entry}`;
+            case 'object':
+              return stringifyObject(entry);
+            default:
+              return String(entry);
+          }
+        })
+        .join();
+
+      return `{ ${str} }`;
+    };
+    const stringifyEntries = (object: { [key: string]: Function }) => {
+      const str = Object.entries(object)
+        .map(([key, entry]) => `${key}: ${entry.name}`)
+        .join();
+      return `{ ${str} }`;
+    };
+
+    const state = stringifyObject(component.state);
+    const props = stringifyEntries(component.props);
+    const methods = stringifyObject(component.methods);
+    const children = [];
+
+    return `<template>
+</template>
+ <script>
+    export default {
+      data() {
+        return ${state || '{}'}
+      },
+      props: ${props || '{}'},
+      methods: ${methods || '{}'},
+      components: {}
+    }
+ </script>
+`;
   }
 };
