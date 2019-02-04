@@ -8,5 +8,8 @@ export default {
       children: []
     };
     return conponent;
+  },
+  generate: function generate() {
+    return '';
   }
 };

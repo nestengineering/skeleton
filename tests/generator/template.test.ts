@@ -1,7 +1,7 @@
 import { Component, ComponentInfo } from './../../src/types';
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import generator from '../../src/generator/template';
+import { generate } from '../../src/generator/template';
 import { Framework } from '../../src/constants';
 
 describe('template generator', () => {
@@ -17,7 +17,7 @@ describe('template generator', () => {
       methods: {},
       children: []
     };
-    generator.createTemplate(Framework.VUE, info, component);
+    generate(Framework.VUE, info, component);
     assert.equal(1, 1);
   });
 });

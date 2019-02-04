@@ -1,14 +1,17 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import VueLogic from '../logics/vue';
+import ReactLogic from '../logics/react';
+import AngularLogic from '../logics/angular';
 import { Component, ComponentInfo } from './../types';
 import { Framework } from '../constants';
 
-const engines: {
-  [framework in Framework]: { convert: (componet: Component) => string }
+const handleGenerators: {
+  [framework in Framework]: (component: Component) => string
 } = {
-  [Framework.VUE]: { convert: (component: Component) => 'return' },
-  [Framework.REACT]: { convert: (component: Component) => 'return' },
-  [Framework.ANGULAR]: { convert: (component: Component) => 'return' }
+  [Framework.VUE]: VueLogic.generate,
+  [Framework.REACT]: ReactLogic.generate,
+  [Framework.ANGULAR]: AngularLogic.generate
 };
 
 const writeFile = (info: ComponentInfo, content: string) => {
@@ -29,10 +32,8 @@ const writeFile = (info: ComponentInfo, content: string) => {
  * @param info Output file info
  * @param component Target component
  */
-const createTemplate = (
+export const generate = (
   framework: Framework,
   info: ComponentInfo,
   component: Component
-) => writeFile(info, engines[framework].convert(component));
-
-export default { createTemplate };
+) => writeFile(info, handleGenerators[framework](component));

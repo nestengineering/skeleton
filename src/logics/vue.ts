@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { Vue, Component } from './../types';
 import * as path from 'path';
 export default {
-  parse: function parse (filePath: string) {
+  parse: function parse(filePath: string) {
     const regex = /(<script>(.|\n|\r)*<\/script>)/;
     const file = readFileSync(filePath).toString();
     const [scriptTemplate] = file.split(regex).filter(str => regex.test(str));
@@ -27,5 +27,8 @@ export default {
         : []
     };
     return component;
+  },
+  generate: function generate() {
+    return '';
   }
 };

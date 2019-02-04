@@ -13,7 +13,7 @@ const handleParsers: {
 };
 
 /**
- * Parses values from React, Vue, or Angualar framework file
+ * Parses values from React, Vue, or Angular framework file
  *
  * @param framework Target framework
  * @param path File path
