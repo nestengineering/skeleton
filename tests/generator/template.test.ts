@@ -1,4 +1,4 @@
-import { Component, FileDetails } from './../../src/types';
+import { Component, FileProperties } from './../../src/types';
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import generate from '../../src/generator/template';
@@ -6,7 +6,7 @@ import { Framework } from '../../src/constants';
 
 describe('template generator', () => {
   it('It should be happy', () => {
-    const info: FileDetails = {
+    const info: FileProperties = {
       path: '',
       extension: 'vue',
       name: 'my-first-component'

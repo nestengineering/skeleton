@@ -4,7 +4,7 @@ import * as path from 'path';
 
 export default {
   parse: function parse(filePath: string) {
-    const regex = /(?<=<template>(\t|\n|\r|.)*<\/template>(\t|\n|\r|.)*)<script>(\t|\n|\r|.)*<\/script>/; // Look behind
+    const regex = /(?<=<template>(\t|\n|\r|.)*<\/template>(\t|\n|\r|.)*)<script>(\t|\n|\r|.)*<\/script>/gm; // Look behind
     const file = readFileSync(filePath).toString();
     const scriptTemplate = file
       .match(regex)
@@ -13,7 +13,7 @@ export default {
 
     const template = scriptTemplate
       .substring('<script>'.length, scriptTemplate.length - '</script>'.length)
-      .replace(/export default/g, 'return')
+      .replace(/export default/, 'return')
       .replace(/import\s?\*?\s?(as)?{?(?=\s.*('|").*('|");)/g, 'let')
       .replace(/\s?}?\s?from(?=\s?('|").*('|");)/g, ' =');
 
@@ -31,12 +31,14 @@ export default {
           )
         : [],
       fileProperties: {
-        name: filePath.replace(/.*(?=\/.*\.vue)/g, '').replace('.vue', ''),
-        path: filePath,
+        name: filePath
+          .replace(/.*(\/|\\)(?=.*\.vue)/g, '')
+          .replace(/.vue$/, ''),
+        path: filePath.replace(/^(.*?)(?=src)/gm, ''),
         extension: 'vue'
       }
     };
-    console.log(component);
+    
     return component;
   },
   generate: function generate(component: Component) {
