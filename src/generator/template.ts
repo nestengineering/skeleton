@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import VueLogic from '../logics/vue';
 import ReactLogic from '../logics/react';
 import AngularLogic from '../logics/angular';
-import { Component, ComponentInfo } from './../types';
+import { Component, FileProperties } from './../types';
 import { Framework } from '../constants';
 
 const handleGenerators: {
@@ -14,7 +14,7 @@ const handleGenerators: {
   [Framework.ANGULAR]: AngularLogic.generate
 };
 
-const writeFile = (info: ComponentInfo, content: string) => {
+const writeFile = (info: FileProperties, content: string) => {
   const output = path.resolve(
     require('os').homedir(),
     'Desktop/templates/',
@@ -34,6 +34,6 @@ const writeFile = (info: ComponentInfo, content: string) => {
  */
 export default (
   framework: Framework,
-  info: ComponentInfo,
+  info: FileProperties,
   component: Component
 ) => writeFile(info, handleGenerators[framework](component));

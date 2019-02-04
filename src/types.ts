@@ -11,8 +11,9 @@ export interface Component {
   readonly props: Props;
   readonly methods: { [key: string]: () => any };
   readonly children: Component[];
+  readonly fileProperties?: FileProperties;
 }
-export interface ComponentInfo {
+export interface FileProperties {
   name: string;
   path: string;
   extension: 'js' | 'ts' | 'vue' | 'html';

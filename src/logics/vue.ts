@@ -1,11 +1,15 @@
 import { readFileSync } from 'fs';
-import { Vue, Component } from './../types';
+import { Vue, Component, FileProperties } from './../types';
 import * as path from 'path';
+
 export default {
   parse: function parse(filePath: string) {
-    const regex = /(<script>(.|\n|\r)*<\/script>)/;
+    const regex = /(?<=<template>(\t|\n|\r|.)*<\/template>(\t|\n|\r|.)*)<script>(\t|\n|\r|.)*<\/script>/; // Look behind
     const file = readFileSync(filePath).toString();
-    const [scriptTemplate] = file.split(regex).filter(str => regex.test(str));
+    const scriptTemplate = file
+      .match(regex)
+      .join('')
+      .trim();
 
     const template = scriptTemplate
       .substring('<script>'.length, scriptTemplate.length - '</script>'.length)
@@ -14,6 +18,7 @@ export default {
       .replace(/\s?}?\s?from(?=\s?('|").*('|");)/g, ' =');
 
     const vue: Vue = new Function(template)();
+
     const component: Component = {
       state: vue.data ? vue.data() : {},
       props: vue.props ? vue.props : {},
@@ -24,8 +29,14 @@ export default {
               path.resolve(filePath.match(/.*(?=\/.*\.vue)/g).join(), relPath)
             )
           )
-        : []
+        : [],
+      fileProperties: {
+        name: filePath.replace(/.*(?=\/.*\.vue)/g, '').replace('.vue', ''),
+        path: filePath,
+        extension: 'vue'
+      }
     };
+    console.log(component);
     return component;
   },
   generate: function generate(component: Component) {

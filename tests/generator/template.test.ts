@@ -1,4 +1,4 @@
-import { Component, ComponentInfo } from './../../src/types';
+import { Component, FileDetails } from './../../src/types';
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
 import generate from '../../src/generator/template';
@@ -6,7 +6,7 @@ import { Framework } from '../../src/constants';
 
 describe('template generator', () => {
   it('It should be happy', () => {
-    const info: ComponentInfo = {
+    const info: FileDetails = {
       path: '',
       extension: 'vue',
       name: 'my-first-component'
@@ -25,7 +25,9 @@ describe('template generator', () => {
       },
       children: []
     };
-    generate(Framework.VUE, info, component);
+    const result = generate(Framework.VUE, info, component);
+
+    console.error(result);
     assert.equal(1, 1);
   });
 });
