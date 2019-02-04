@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Model from "../parts/model.vue";
+import Model from "../parts/Model.vue";
 import * as Parser from "src/util/parser";
 import { User, UserDetails } from "src/interfaces";
 
