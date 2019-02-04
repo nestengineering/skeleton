@@ -28,7 +28,7 @@ export default {
     };
     return component;
   },
-  generate: function generate() {
+  generate: function generate(component: Component) {
     return '';
   }
 };
