@@ -1,4 +1,4 @@
-import { Component } from './../types';
+import { Component, FileProperties } from './../types';
 import { Framework } from '../constants';
 import VueLogic from '../logics/vue';
 import ReactLogic from '../logics/react';

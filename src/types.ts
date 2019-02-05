@@ -11,12 +11,14 @@ export interface Component {
   readonly props: Props;
   readonly methods: { [key: string]: () => any };
   readonly children: Component[];
+  readonly fileProperties?: FileProperties; // 必須にして良いのか？
 }
-export interface ComponentInfo {
+export interface FileProperties {
   name: string;
   path: string;
   extension: 'js' | 'ts' | 'vue' | 'html';
 }
+
 export interface Vue {
   data?: () => { readonly [key: string]: any };
   props?: { readonly [key: string]: any };
