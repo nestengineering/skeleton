@@ -71,7 +71,6 @@ describe('template generator', () => {
       )
       .toString();
 
-    console.log(result);
     assert.equal(
       result,
       '<template></template>\n<script>\nimport Model from "src/model/Model.vue";\nimport Model2 from "src/model/Model2.vue";\n\nexport default {\n  data() {\n    return { password: \'\' }\n  },\n  props: { user: String },\n  methods: { signIn: function signIn() { },signOut: function signOut() { } },\n  components: {\n    Model,Model2\n  }\n};\n</script>\n'
