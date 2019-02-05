@@ -34,11 +34,12 @@ export default {
         name: filePath
           .replace(/.*(\/|\\)(?=.*\.vue)/g, '')
           .replace(/.vue$/, ''),
+        // パスの区切り方を見直す
         path: filePath.replace(/^(.*?)(?=src)/gm, ''),
         extension: 'vue'
       }
     };
-    
+
     return component;
   },
   generate: function generate(component: Component) {
@@ -57,7 +58,6 @@ export default {
           }
         })
         .join();
-
       return `{ ${str} }`;
     };
     const stringifyEntries = (object: { [key: string]: Function }) => {
@@ -70,20 +70,35 @@ export default {
     const state = stringifyObject(component.state);
     const props = stringifyEntries(component.props);
     const methods = stringifyObject(component.methods);
-    const children = [];
 
-    return `<template>
-</template>
- <script>
-    export default {
-      data() {
-        return ${state || '{}'}
+    const imports = component.children.reduce(
+      (accumulator: { names: string[]; paths: string[] }, child) => {
+        const names = [...accumulator.names, child.fileProperties.name];
+        const paths = [
+          ...accumulator.paths,
+          `import ${child.fileProperties.name} from ${JSON.stringify(
+            child.fileProperties.path
+          )};\n`
+        ];
+        return { names, paths };
       },
-      props: ${props || '{}'},
-      methods: ${methods || '{}'},
-      components: {}
-    }
- </script>
+      { names: [], paths: [] }
+    );
+
+    return `<template></template>
+<script>
+${imports.paths.join('')}
+export default {
+  data() {
+    return ${state || '{}'}
+  },
+  props: ${props || '{}'},
+  methods: ${methods || '{}'},
+  components: {
+    ${imports.names.join()}
+  }
+};
+</script>
 `;
   }
 };

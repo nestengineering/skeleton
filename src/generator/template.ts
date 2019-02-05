@@ -14,26 +14,38 @@ const handleGenerators: {
   [Framework.ANGULAR]: AngularLogic.generate
 };
 
-const writeFile = (info: FileProperties, content: string) => {
-  const output = path.resolve(
-    require('os').homedir(),
-    'Desktop/templates/',
-    info.path
+const writeFile = (
+  properties: FileProperties & { outputDirectory?: string },
+  content: string
+) => {
+  const directory =
+    properties.outputDirectory ||
+    path.resolve(
+      require('os').homedir(),
+      'Desktop/templates/',
+      properties.path
+    );
+  fs.mkdirSync(properties.outputDirectory, { recursive: true });
+  fs.writeFileSync(
+    `${directory}/${properties.name}.${properties.extension}`,
+    content
   );
-
-  fs.mkdirSync(output, { recursive: true });
-  fs.writeFileSync(`${output}/${info.name}.${info.extension}`, content);
 };
 
 /**
  * Generate a framework template file starting from a Component
  *
- * @param framework Target framework
- * @param info Output file info
+ * @param properties Target framework, output directory etc...
  * @param component Target component
  */
 export default (
-  framework: Framework,
-  info: FileProperties,
+  properties: { framework: Framework; outputDirectory?: string },
   component: Component
-) => writeFile(info, handleGenerators[framework](component));
+) =>
+  writeFile(
+    {
+      outputDirectory: properties.outputDirectory,
+      ...component.fileProperties
+    },
+    handleGenerators[properties.framework](component)
+  );
