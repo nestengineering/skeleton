@@ -25,7 +25,7 @@ const writeFile = (
       'Desktop/templates/',
       properties.path
     );
-  fs.mkdirSync(properties.outputDirectory, { recursive: true });
+  fs.mkdirSync(directory, { recursive: true });
   fs.writeFileSync(
     `${directory}/${properties.name}.${properties.extension}`,
     content
