@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var path = require('path');
-var Skeleton = require('./dist/index').default;
+var Skeleton = require('./dist/src/index.ts/index.js').default;
 require('yargs')
   .usage('$0 <cmd> [filepath] [framework]')
   .command(
