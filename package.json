@@ -6,6 +6,9 @@
   },
   "description": "Abstract model of the front end",
   "main": "dist/index.js",
+  "bin": {
+    "skeleton": "./index.js"
+  },
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register tests/**/*.test.ts"
@@ -30,6 +33,7 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
-    "opener": "^1.5.1"
+    "opener": "^1.5.1",
+    "yargs": "^12.0.5"
   }
 }
