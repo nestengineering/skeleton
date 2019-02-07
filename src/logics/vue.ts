@@ -26,7 +26,7 @@ export default {
       children: vue.components
         ? Object.entries(vue.components).map(([key, relPath]) =>
             parse(
-              path.resolve(filePath.match(/.*(?=\/.*\.vue)/g).join(), relPath)
+              path.resolve(filePath.match(/.*(?=(\/|\\))/g).join(), relPath)
             )
           )
         : [],
