@@ -1,3 +1,4 @@
+export const diagramHtml = `
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,7 +16,7 @@
       };
 
       const entoryPoint = (parent, data, first = true) => {
-        parent.style.border = `1px solid`;
+        parent.style.border = '1px solid';
         parent.style.boxShadow = '3px 3px 3px 3px rgba(0,0,0,0.5)';
         parent.style.margin = '10px';
         if (first) setProperty(parent, data);
@@ -41,7 +42,10 @@
           nameDom.style.background = '#000';
           nameDom.style.color = '#fff';
           nameDom.style.width = '100px';
-          nameDom.innerHTML = `<span style="color:#fd5e60; font-weight: bold;">name: </span><span style="white-space: pre">${name}</span>`;
+          nameDom.innerHTML =
+            '<span style="color:#fd5e60; font-weight: bold;">name: </span><span style="white-space: pre">' +
+            name +
+            '</span>';
           box.appendChild(nameDom);
         }
         if (state) box.appendChild(createBlock('state', state));
@@ -60,7 +64,7 @@
           const li = document.createElement('li');
           const keyDom = document.createElement('span');
           const valueDom = document.createElement('span');
-          keyDom.innerHTML = `<span style="color:#a43161">${key}</span>:`;
+          keyDom.innerHTML = '<span style="color:#a43161">' + key + '</span>:';
           valueDom.textContent = value;
           li.appendChild(keyDom);
           li.appendChild(valueDom);
@@ -73,7 +77,7 @@
         const span = document.createElement('span');
         const end = document.createElement('span');
         end.textContent = '}';
-        span.textContent = `${label} {`;
+        span.textContent = label + ' {';
         span.appendChild(getListFromObj(data));
         span.appendChild(end);
         return span;
@@ -89,9 +93,10 @@
         return root;
       };
 
-      const data = 'SKELETON_DATA'
+      const data = 'SKELETON_DATA';
 
       document.getElementById('app').appendChild(createDiagram(data));
     </script>
   </body>
 </html>
+`
